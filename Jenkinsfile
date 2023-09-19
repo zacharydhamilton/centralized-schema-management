@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                csh ' cd centralized-schema-management'
+                sh 'cd centralized-schema-management'
                 sh 'mvn clean install'
             }
         }
