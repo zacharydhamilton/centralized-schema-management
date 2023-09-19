@@ -1,6 +1,6 @@
 # This is a work in progress
 
-Goals
+#### Goals
 
 - showcase the different subject name strategies
 - showcase the different compatability modes
@@ -10,9 +10,9 @@ Goals
 - showcase build automation
 - showcase build backward-compatibility
 
-# Steps
+## Steps
 
-### Getting Jenkins online
+#### Getting Jenkins online
 
 1. docker compose up -d
 1. Get the adminPassword

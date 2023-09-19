@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     tools {
-        maven 'Maven 3.8.1' 
+        maven 'Maven 3.9.4' 
         jdk 'JDK 11'
     }
 
@@ -16,12 +16,6 @@ pipeline {
         stage('Build and Test') {
             steps {
                 sh 'mvn clean install'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // sh './deploy.sh'
             }
         }
     }
