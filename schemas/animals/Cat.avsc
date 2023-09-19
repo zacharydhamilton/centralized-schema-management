@@ -1,0 +1,23 @@
+{
+    "type": "record",
+    "name": "Cat",
+    "namespace": "com.github.zacharydhamilton.events.animals",
+    "version": "1",
+    "fields": [
+        {
+            "name": "species",
+            "type": "string",
+            "doc": "What species the cat this is"
+        },
+        {
+            "name": "color",
+            "type": "string",
+            "doc": "What color the cat is"
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "doc": "The name of the cat"
+        }
+    ]
+}

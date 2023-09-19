@@ -1,0 +1,23 @@
+{
+    "type": "record",
+    "name": "Motorcycle",
+    "namespace": "com.github.zacharydhamilton.events.vehicles",
+    "version": "1",
+    "fields": [
+        {
+            "name": "wheels",
+            "type": "int",
+            "doc": "The number of wheels this vehicle has"
+        },
+        {
+            "name": "make",
+            "type": "string",
+            "doc": "The make of the vehicle"
+        },
+        {
+            "name": "model",
+            "type": "string",
+            "doc": "The model of the vehicle"
+        }
+    ]
+}

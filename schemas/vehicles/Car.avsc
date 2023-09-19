@@ -1,0 +1,33 @@
+{
+    "type": "record",
+    "name": "Car",
+    "namespace": "com.github.zacharydhamilton.events.vehicles",
+    "version": "1",
+    "fields": [
+        {
+            "name": "wheels",
+            "type": "int",
+            "doc": "The number of wheels this vehicle has"
+        },
+        {
+            "name": "make",
+            "type": "string",
+            "doc": "The make of the vehicle"
+        },
+        {
+            "name": "model",
+            "type": "string",
+            "doc": "The model of the vehicle"
+        },
+        {
+            "name": "sport",
+            "type": "boolean",
+            "doc": "Whether or not this vehicle is a sport"
+        },
+        {
+            "name": "spoiler",
+            "type": "boolean",
+            "doc": "Whether or not this vehicle has a spoiler"
+        }
+    ]
+}
