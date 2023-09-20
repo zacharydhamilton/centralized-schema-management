@@ -2,9 +2,14 @@
 **/.terraform*
 **/terraform.tfstate*
 
-# Secrets 
+# Secrets
+**/secrets.txt 
 **/env.sh
 **/producer.properties
+
+# Jenkins data
+jenkins/*
+!**/.gitkeep
 
 # Java
 # Compiled bytecode files

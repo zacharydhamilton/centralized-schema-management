@@ -1,4 +1,4 @@
-package com.github.zacharydhamilton.kafka.schemaregistry;
+package com.github.zacharydhamilton;
 
 import static org.junit.Assert.assertTrue;
 

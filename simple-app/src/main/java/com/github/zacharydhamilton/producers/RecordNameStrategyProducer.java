@@ -1,4 +1,4 @@
-package com.github.zacharydhamilton.kafka.schemaregistry.management.centralized;
+package com.github.zacharydhamilton.producers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +18,6 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import com.github.zacharydhamilton.events.vehicles.Car;
 import com.github.zacharydhamilton.events.vehicles.Motorcycle;
 import com.github.zacharydhamilton.events.vehicles.Truck;
-import com.github.zacharydhamilton.kafka.common.Utils;
 
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
@@ -41,9 +40,9 @@ public class RecordNameStrategyProducer {
     private static Properties configure() throws ConfigException, IOException {
         Properties props = new Properties();
         if (CONFIG_TYPE == "FILE") {
-            Utils.addPropsFromFile(props, CONFIG_FILE);
+            ProducerUtils.addPropsFromFile(props, CONFIG_FILE);
         } else if (CONFIG_TYPE =="ENV") {
-            Utils.addPropsFromEnv(props, REQUIRED_PROPS);
+            ProducerUtils.addPropsFromEnv(props, REQUIRED_PROPS);
         } else {
             throw new ConfigException(String.format("Unknown CONFIG_TYPE '%s'. Supported types are '[FILE, ENV]'", System.getenv("CONFIG_TYPE")));
         }
@@ -55,7 +54,7 @@ public class RecordNameStrategyProducer {
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);    
         props.put(KafkaAvroSerializerConfig.VALUE_SUBJECT_NAME_STRATEGY, RecordNameStrategy.class.getName());
-        Utils.preInitChecks(props, REQUIRED_PROPS);
+        ProducerUtils.preInitChecks(props, REQUIRED_PROPS);
         return props;
     }
     private static GenericRecord randomVehicle() {

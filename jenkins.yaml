@@ -1,0 +1,39 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by JCasC"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "zach"
+          password: "adm1npassw0rd"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  jdk:
+    installations:
+    - name: "jdk11"
+  maven:
+    installations:
+    - name: "maven3.9.4"
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.9.4"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
+  terraform:
+    installations:
+    - name: "terraform"
+      properties:
+      - installSource:
+          installers:
+          - terraformInstaller:
+              id: "30816-darwin-amd64"

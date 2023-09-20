@@ -1,7 +1,12 @@
+# RANDOM IDS
+# --------------------
+resource "random_id" "confluent" {
+    byte_length = 4
+} 
 # ENV
 # --------------------
 resource "confluent_environment" "main" {
-    display_name = "centralized-schema-management"
+    display_name = var.environment_name
 }
 # TF MANAGER
 # --------------------
@@ -77,7 +82,7 @@ resource "confluent_schema_registry_cluster_config" "main" {
         id = confluent_schema_registry_cluster.main.id 
     }
     rest_endpoint = confluent_schema_registry_cluster.main.rest_endpoint
-    compatibility_level = "NONE"
+    compatibility_level = "FORWARD"
     credentials {
         key = confluent_api_key.app_manager_sr.id
         secret = confluent_api_key.app_manager_sr.secret
@@ -97,7 +102,7 @@ resource "confluent_schema_registry_cluster_mode" "main" {
 # KAFKA
 # --------------------
 resource "confluent_kafka_cluster" "main" {
-    display_name = "kafka-schema-management"
+    display_name = "kafka-cluster-${random_id.confluent.hex}"
     availability = "SINGLE_ZONE"
     cloud = "AWS"
     region = var.aws_region
@@ -106,7 +111,7 @@ resource "confluent_kafka_cluster" "main" {
         id = confluent_environment.main.id 
     }
 }
-# JACKPOT SERVER ACCESS
+# PRODUCERS
 # --------------------
 resource "confluent_service_account" "producers" {
     display_name = "producers-${random_id.confluent.hex}"

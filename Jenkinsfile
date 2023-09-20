@@ -2,8 +2,8 @@ pipeline {
     agent any 
 
     tools {
-        maven 'Maven 3.9.4' 
-        jdk 'JDK 11'
+        maven 'maven3.9.4' 
+        jdk 'jdk11'
     }
 
     stages {
@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                dir('centralized-schema-management') {
+                dir('simple-app') {
                     sh 'mvn clean install'
                 }
             }

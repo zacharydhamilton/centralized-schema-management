@@ -1,32 +1,7 @@
-# PROVIDERS
-# --------------------
-terraform {
-    required_providers {
-        aws = {
-            source  = "hashicorp/aws"
-            version = "4.51"
-        }
-        confluent = {
-            source = "confluentinc/confluent"
-            version = "1.51.0"
-        }
-    }
-}
-# RANDOM IDS
-# --------------------
-resource "random_id" "confluent" {
-    byte_length = 4
-} 
-# VARS
-# --------------------
-variable "aws_region" {
-    type = string
-    default = "us-east-2"
-}
 # FILE OUTPUTS
 # --------------------
 resource "local_file" "producer_properties" {
-    filename = "../centralized-schema-management/producer.properties"
+    filename = "../producer.properties"
     content = <<-EOF
     ## Confluent Cloud Cluster
     bootstrap.servers=${substr(confluent_kafka_cluster.main.bootstrap_endpoint,11,-1)}
