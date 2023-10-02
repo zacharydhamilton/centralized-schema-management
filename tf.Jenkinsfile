@@ -35,9 +35,6 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh 'echo "git_branch: $GIT_BRANCH"'
-                        sh "echo ${branchName}"
-                        sh "echo direct"
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
                 }
@@ -45,7 +42,7 @@ pipeline {
         }
         stage('Trigger app build') {
             steps {
-                build job: "app-branch-${env.BRANCH_NAME}", wait: false
+                build job: "app-branch-${env.GIT_BRANCH}", wait: false
             }
         }
     }
