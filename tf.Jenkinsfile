@@ -31,9 +31,20 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh 'echo test'
-                        sh 'echo "key: $CONFLUENT_CLOUD_API_KEY"'
-                        sh 'echo "secret: $CONFLUENT_CLOUD_API_SECRET"'
+                        sh '''
+                            if [ -z "$CONFLUENT_CLOUD_API_KEY" ]; then
+                                echo "CONFLUENT_CLOUD_API_KEY is not set!"
+                                exit 1
+                            else
+                                echo "CONFLUENT_CLOUD_API_KEY is set!"
+                            fi
+                            if [ -z "$CONFLUENT_CLOUD_API_SECRET" ]; then
+                                echo "CONFLUENT_CLOUD_API_SECRET is not set!"
+                                exit 1
+                            else
+                                echo "CONFLUENT_CLOUD_API_SECRET is set!"
+                            fi
+                        '''
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
                 }
