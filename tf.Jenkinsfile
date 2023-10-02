@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm 
+                checkout scm
+                branch = scm.branches[0].name.replaceAll("origin/", "") 
             }
         }
         stage('Terraform init') {
@@ -31,20 +32,8 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh '''
-                            if [ -z "$CONFLUENT_CLOUD_API_KEY" ]; then
-                                echo "CONFLUENT_CLOUD_API_KEY is not set!"
-                                exit 1
-                            else
-                                echo "CONFLUENT_CLOUD_API_KEY is set!"
-                            fi
-                            if [ -z "$CONFLUENT_CLOUD_API_SECRET" ]; then
-                                echo "CONFLUENT_CLOUD_API_SECRET is not set!"
-                                exit 1
-                            else
-                                echo "CONFLUENT_CLOUD_API_SECRET is set!"
-                            fi
-                        '''
+                        sh 'echo "git_branch: $GIT_BRANCH"'
+                        sh "echo ${branch}"
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
                 }

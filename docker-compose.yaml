@@ -20,3 +20,5 @@ services:
       JENKINS_OPTS: --httpPort=8080
       JENKINS_HOME: /var/jenkins_home
       CASC_JENKINS_CONFIG: /var/jenkins_home/casc_configs
+      CONFLUENT_CLOUD_API_KEY: $CONFLUENT_CLOUD_API_KEY
+      CONFLUENT_CLOUD_API_SECRET: $CONFLUENT_CLOUD_API_SECRET
