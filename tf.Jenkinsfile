@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                branch = scm.branches[0].name.replaceAll("origin/", "") 
+                branchName = scm.branches[0].name.replaceAll("origin/", "") 
             }
         }
         stage('Terraform init') {
@@ -33,7 +33,7 @@ pipeline {
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
                         sh 'echo "git_branch: $GIT_BRANCH"'
-                        sh "echo ${branch}"
+                        sh "echo ${branchName}"
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
                 }
