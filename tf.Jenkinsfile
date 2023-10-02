@@ -5,6 +5,10 @@ pipeline {
         CONFLUENT_CLOUD_API_SECRET = credentials('CONFLUENT_CLOUD_API_SECRET')
     }
 
+    tools {
+        terraform 'terraform'
+    }
+
     stages {
         stage('Checkout') {
             steps {

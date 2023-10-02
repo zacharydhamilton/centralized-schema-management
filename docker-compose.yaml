@@ -13,9 +13,8 @@ services:
     volumes:
       - ./jenkins/home:/var/jenkins_home
       - ./jenkins/casc_configs/jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
-      - ./jenkins/groovy_jobs/branch-main.groovy:/var/jenkins_home/groovy_jobs/branch-main.groovy
-      - ./jenkins/groovy_jobs/branch-rel-2.0.0.groovy:/var/jenkins_home/groovy_jobs/branch-rel-2.0.0.groovy
-      - ./jenkins/groovy_jobs/branch-rel-1.0.0.groovy:/var/jenkins_home/groovy_jobs/branch-rel-1.0.0.groovy
+      - ./jenkins/groovy_jobs/tf-jobs.groovy:/var/jenkins_home/groovy_jobs/tf-jobs.groovy
+      - ./jenkins/groovy_jobs/app-jobs.groovy:/var/jenkins_home/groovy_jobs/app-jobs.groovy
       - ./outputs:/var/outputs
     environment:
       JENKINS_OPTS: --httpPort=8080
