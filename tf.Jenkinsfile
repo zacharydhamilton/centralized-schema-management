@@ -1,9 +1,5 @@
 pipeline {
     agent any 
-    environment {
-        CONFLUENT_CLOUD_API_KEY = credentials('CONFLUENT_CLOUD_API_KEY')
-        CONFLUENT_CLOUD_API_SECRET = credentials('CONFLUENT_CLOUD_API_SECRET')
-    }
 
     tools {
         terraform 'terraform'
@@ -32,7 +28,11 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 dir('terraform') {
-                    sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
+                    withCredentials([
+                        usernamePassword(credentialId: 'confluent-cloud-creds', usernameVariable: '', passwordVarialbe: '')
+                    ]) {
+                        sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
+                    }
                 }
             }
         }
