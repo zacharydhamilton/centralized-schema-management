@@ -29,7 +29,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     withCredentials([
-                        usernamePassword(credentialId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVarialbe: 'CONFLUENT_CLOUD_API_SECRET')
+                        usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
