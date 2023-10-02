@@ -1,12 +1,13 @@
 pipeline {
     agent any 
-    def branchName = ''
+    
 
     tools {
         terraform 'terraform'
     }
 
     stages {
+        branchName = ''
         stage('Checkout') {
             steps {
                 checkout scm
