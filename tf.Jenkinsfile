@@ -7,7 +7,6 @@ pipeline {
     }
 
     stages {
-        def branchName = ''
         stage('Checkout') {
             steps {
                 checkout scm
@@ -38,6 +37,7 @@ pipeline {
                     ]) {
                         sh 'echo "git_branch: $GIT_BRANCH"'
                         sh "echo ${branchName}"
+                        sh "echo direct"
                         sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                     }
                 }
