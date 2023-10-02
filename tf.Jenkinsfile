@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        branchName = ''
+        def branchName = ''
         stage('Checkout') {
             steps {
                 checkout scm
