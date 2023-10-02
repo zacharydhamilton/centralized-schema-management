@@ -56,4 +56,4 @@ tool:
       - installSource:
           installers:
           - terraformInstaller:
-              id: "30816-darwin-amd64"
+              id: "30816-linux-amd64"

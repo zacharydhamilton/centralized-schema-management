@@ -32,13 +32,13 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 dir('terraform') {
-                    sh 'terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate'
+                    sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
                 }
             }
         }
         stage('Trigger app build') {
             steps {
-                build job: 'app-branch-${env.BRANCH_NAME}', wait: false
+                build job: "app-branch-${env.BRANCH_NAME}", wait: false
             }
         }
     }
