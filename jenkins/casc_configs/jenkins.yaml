@@ -10,10 +10,25 @@ jenkins:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
 
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - string:
+            scope: GLOBAL
+            id: "CONFLUENT_CLOUD_API_KEY"
+            secret: "${CONFLUENT_CLOUD_API_KEY}"
+        - string:
+            scope: GLOBAL
+            id: "CONFLUENT_CLOUD_API_SECRET"
+            secret: "${CONFLUENT_CLOUD_API_SECRET}"
+
 jobs: 
-  - file: /var/jenkins_home/groovy_jobs/branch-main.groovy
-  - file: /var/jenkins_home/groovy_jobs/branch-rel-2.0.0.groovy
-  - file: /var/jenkins_home/groovy_jobs/branch-rel-1.0.0.groovy
+  - file: /var/jenkins_home/groovy_jobs/tf-jobs.groovy
+  - file: /var/jenkins_home/groovy_jobs/app-jobs.groovy
+  # - file: /var/jenkins_home/groovy_jobs/branch-main.groovy
+  # - file: /var/jenkins_home/groovy_jobs/branch-rel-2.0.0.groovy
+  # - file: /var/jenkins_home/groovy_jobs/branch-rel-1.0.0.groovy
 
 tool:
   git:

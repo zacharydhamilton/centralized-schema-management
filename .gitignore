@@ -11,9 +11,10 @@
 jenkins/home/*
 !jenkins/home/.gitkeep
 
-# Output JARs
+# Output JARs/TF State
 outputs/*
 !outputs/.gitkeep
+!outputs/terraform/.gitkeep
 
 # Java
 # Compiled bytecode files

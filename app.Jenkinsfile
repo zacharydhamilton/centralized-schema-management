@@ -12,7 +12,6 @@ pipeline {
                 checkout scm 
             }
         }
-
         stage('Build and Test') {
             steps {
                 dir('simple-app') {

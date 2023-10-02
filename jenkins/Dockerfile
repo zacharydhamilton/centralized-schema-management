@@ -6,6 +6,7 @@ FROM jenkins/jenkins:2.414.2-lts
 
 # For plugin names and versions: https://archives.jenkins.io/plugins/
 RUN jenkins-plugin-cli --plugins configuration-as-code:1700.v6f448841296e
+RUN jenkins-plugin-cli --plugins credentials:1290.v2e5b_13eb_b_127
 RUN jenkins-plugin-cli --plugins job-dsl:1.85 
 RUN jenkins-plugin-cli --plugins workflow-job:1346.v180a_63f40267
 RUN jenkins-plugin-cli --plugins workflow-aggregator:596.v8c21c963d92d
