@@ -8,8 +8,12 @@
 **/producer.properties
 
 # Jenkins data
-jenkins/*
-!**/.gitkeep
+jenkins/home/*
+!jenkins/home/.gitkeep
+
+# Output JARs
+outputs/*
+!outputs/.gitkeep
 
 # Java
 # Compiled bytecode files

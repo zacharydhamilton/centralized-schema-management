@@ -10,6 +10,11 @@ jenkins:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
 
+jobs: 
+  - file: /var/jenkins_home/groovy_jobs/branch-main.groovy
+  - file: /var/jenkins_home/groovy_jobs/branch-rel-2.0.0.groovy
+  - file: /var/jenkins_home/groovy_jobs/branch-rel-1.0.0.groovy
+
 tool:
   git:
     installations:

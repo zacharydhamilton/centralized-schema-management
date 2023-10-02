@@ -20,5 +20,12 @@ pipeline {
                 }
             }
         }
+        stage('Move JAR file') {
+            steps {
+                script {
+                    sh 'mv simple-app/target/simple-app-*.jar /var/outputs/'
+                }
+            }
+        }
     }
 }

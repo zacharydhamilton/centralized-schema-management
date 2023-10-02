@@ -5,15 +5,18 @@ services:
     hostname: jenkins
     container_name: jenkins
     build:
-      context: .
+      context: ./jenkins
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - ./jenkins:/var/jenkins_home
-      - ./jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
-      - ./secrets.txt:/var/jenkins_home/secrets/secrets.txt
+      - ./jenkins/home:/var/jenkins_home
+      - ./jenkins/casc_configs/jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
+      - ./jenkins/groovy_jobs/branch-main.groovy:/var/jenkins_home/groovy_jobs/branch-main.groovy
+      - ./jenkins/groovy_jobs/branch-rel-2.0.0.groovy:/var/jenkins_home/groovy_jobs/branch-rel-2.0.0.groovy
+      - ./jenkins/groovy_jobs/branch-rel-1.0.0.groovy:/var/jenkins_home/groovy_jobs/branch-rel-1.0.0.groovy
+      - ./outputs:/var/outputs
     environment:
       JENKINS_OPTS: --httpPort=8080
       JENKINS_HOME: /var/jenkins_home
