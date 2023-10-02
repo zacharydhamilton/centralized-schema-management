@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                branchName = scm.branches[0].name.replaceAll("origin/", "") 
+                def branchName = scm.branches[0].name.replaceAll("origin/", "") 
             }
         }
         stage('Terraform init') {
