@@ -1,5 +1,6 @@
 pipeline {
     agent any 
+    def branchName = ''
 
     tools {
         terraform 'terraform'
@@ -9,7 +10,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                def branchName = scm.branches[0].name.replaceAll("origin/", "") 
+                script {
+                    branchName = scm.branches[0].name.replaceAll("origin/", "")
+                }
             }
         }
         stage('Terraform init') {
