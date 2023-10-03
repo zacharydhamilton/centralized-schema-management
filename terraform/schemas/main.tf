@@ -32,7 +32,7 @@ resource "confluent_schema" "topic_name_strategy_schemas" {
     rest_endpoint = data.confluent_schema_registry_cluster.main.rest_endpoint
     subject_name = "${lower(split(".", each.value)[0])}-value"
     format = "AVRO"
-    schema = file("../schemas/animals/${each.value}")
+    schema = file("../../schemas/animals/${each.value}")
     credentials {
         key = var.app_manager_sr_key
         secret = var.app_manager_sr_secret
@@ -48,7 +48,7 @@ resource "confluent_schema" "topic_record_name_strategy_schemas" {
     rest_endpoint = data.confluent_schema_registry_cluster.main.rest_endpoint
     subject_name = format("${local.pizza_topic_name}-%s.%s", local.fully_qualified_class_prefix, "${split(".", each.value)[0]}")
     format = "AVRO"
-    schema = file("../schemas/pizza/${each.value}")
+    schema = file("../../schemas/pizza/${each.value}")
     credentials {
         key = var.app_manager_sr_key
         secret = var.app_manager_sr_secret
@@ -64,7 +64,7 @@ resource "confluent_schema" "record_name_strategy_scheams" {
     rest_endpoint = data.confluent_schema_registry_cluster.main.rest_endpoint
     subject_name = format("%s.%s", local.fully_qualified_class_prefix, "${split(".", each.value)[0]}")
     format = "AVRO"
-    schema = file("../schemas/vehicles/${each.value}")
+    schema = file("../../schemas/vehicles/${each.value}")
     credentials {
         key = var.app_manager_sr_key
         secret = var.app_manager_sr_secret
