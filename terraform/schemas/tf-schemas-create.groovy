@@ -48,7 +48,7 @@ pipeline {
         }
         stage('Trigger app build') {
             steps {
-                build job: "app-branch-${branchName}", wait: false
+                build job: "app-build-${branchName}", wait: false
             }
         }
     }
