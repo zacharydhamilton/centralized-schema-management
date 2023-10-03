@@ -7,7 +7,7 @@ pipelineJob('app-branch-main') {
                     branches('main')
                 }
             }
-            scriptPath('app.Jenkinsfile')
+            scriptPath('simple-app/app-build.groovy')
         }
     }
 }
@@ -20,7 +20,7 @@ pipelineJob('app-branch-rel-1.0.0') {
                     branches('rel-1.0.0')
                 }
             }
-            scriptPath('app.Jenkinsfile')
+            scriptPath('simple-app/app-build.groovy')
         }
     }
 }
@@ -33,7 +33,7 @@ pipelineJob('app-branch-rel-2.0.0') {
                     branches('rel-2.0.0')
                 }
             }
-            scriptPath('app.Jenkinsfile')
+            scriptPath('simple-app/app-build.groovy')
         }
     }
 }

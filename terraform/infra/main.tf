@@ -167,11 +167,11 @@ resource "confluent_api_key" "producers_kafka" {
         confluent_role_binding.producers_kafka
     ]
 }
-# TOPICS AND SCHEMAS
+# TOPICS
 # --------------------
 locals {
     // Could jsondecode the schema file and use the namespace
-    fully_qualified_class_prefix = "com.example.objects"
+    fully_qualified_class_prefix = "com.github.zacharydhamilton.events"
 
     animal_schema_files = fileset("../schemas/animals", "*.avsc")
     animal_topic_names = [for s in local.animal_schema_files : lower(split(".", s)[0])]
@@ -184,20 +184,6 @@ locals {
 }
 # TOPIC NAME STRATEGY
 # --------------------
-resource "confluent_schema" "topic_name_strategy_schemas" {
-    for_each = toset(local.animal_schema_files)
-    schema_registry_cluster {
-        id = confluent_schema_registry_cluster.main.id 
-    }
-    rest_endpoint = confluent_schema_registry_cluster.main.rest_endpoint
-    subject_name = "${lower(split(".", each.value)[0])}-value"
-    format = "AVRO"
-    schema = file("../schemas/animals/${each.value}")
-    credentials {
-        key = confluent_api_key.app_manager_sr.id
-        secret = confluent_api_key.app_manager_sr.secret
-    }
-}
 resource "confluent_kafka_topic" "topic_name_strategy_topics" {
     for_each = toset(local.animal_topic_names)
     topic_name = each.value
@@ -213,20 +199,6 @@ resource "confluent_kafka_topic" "topic_name_strategy_topics" {
 }
 # TOPIC RECORD NAME STRATEGY
 # --------------------
-resource "confluent_schema" "topic_record_name_strategy_schemas" {
-    for_each = toset(local.pizza_schema_files)
-    schema_registry_cluster {
-        id = confluent_schema_registry_cluster.main.id 
-    }
-    rest_endpoint = confluent_schema_registry_cluster.main.rest_endpoint
-    subject_name = format("${local.pizza_topic_name}-%s.%s", local.fully_qualified_class_prefix, "${split(".", each.value)[0]}")
-    format = "AVRO"
-    schema = file("../schemas/pizza/${each.value}")
-    credentials {
-        key = confluent_api_key.app_manager_sr.id
-        secret = confluent_api_key.app_manager_sr.secret
-    }
-}
 resource "confluent_kafka_topic" "topic_record_name_strategy_topics" {
     topic_name = local.pizza_topic_name
     rest_endpoint = confluent_kafka_cluster.main.rest_endpoint
@@ -241,20 +213,6 @@ resource "confluent_kafka_topic" "topic_record_name_strategy_topics" {
 }
 # RECORD NAME STRATEGY
 # --------------------
-resource "confluent_schema" "record_name_strategy_scheams" {
-    for_each = toset(local.vehicle_schema_files)
-    schema_registry_cluster {
-        id = confluent_schema_registry_cluster.main.id 
-    }
-    rest_endpoint = confluent_schema_registry_cluster.main.rest_endpoint
-    subject_name = format("%s.%s", local.fully_qualified_class_prefix, "${split(".", each.value)[0]}")
-    format = "AVRO"
-    schema = file("../schemas/vehicles/${each.value}")
-    credentials {
-        key = confluent_api_key.app_manager_sr.id
-        secret = confluent_api_key.app_manager_sr.secret
-    }
-}
 resource "confluent_kafka_topic" "record_name_strategy_topics" {
     topic_name = local.vehicle_topic_name
     rest_endpoint = confluent_kafka_cluster.main.rest_endpoint

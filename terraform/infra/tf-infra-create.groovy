@@ -1,7 +1,6 @@
 pipeline {
     agent any 
     
-
     tools {
         terraform 'terraform'
     }
@@ -10,9 +9,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                script {
-                    branchName = scm.branches[0].name.replaceAll("origin/", "")
-                }
             }
         }
         stage('Terraform init') {
@@ -35,14 +31,9 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh "terraform apply -auto-approve -state=/var/outputs/tf-${env.BRANCH_NAME}.tfstate"
+                        sh "terraform apply -auto-approve -state=/var/outputs/tf-infra-main.tfstate"
                     }
                 }
-            }
-        }
-        stage('Trigger app build') {
-            steps {
-                build job: "app-branch-${branchName}", wait: false
             }
         }
     }
