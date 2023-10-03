@@ -7,16 +7,12 @@ pipeline {
     }
 
     stages {
-        stage('Get Branch') {
-            steps {
-                script {
-                    branchName = scm.branches[0].name.replaceAll("origin/", "")
-                }
-            }
-        }
         stage('Checkout') {
             steps {
                 checkout scm
+                script {
+                    branchName = scm.branches[0].name.replaceAll("origin/", "")
+                }
             }
         }
         stage('Terraform init') {
@@ -39,7 +35,13 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh "terraform destroy -auto-approve -state=/var/outputs/tf-schemas-${branchName}.tfstate"
+                        sh """
+                        terraform destroy -auto-approve -state=/var/outputs/tf-schemas-${branchName}.tfstate \
+                        -var="env_id=\$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw env_id)" \
+                        -var="sr_cluster_id=\$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw sr_cluster_id)" \
+                        -var="app_manager_sr_key=\$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw app_manager_sr_key)" \
+                        -var="app_manager_sr_secret=\$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw app_manager_sr_secret)"
+                        """
                     }
                 }
             }
