@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Terraform apply') {
             steps {
-                dir('terraform') {
+                dir('terraform/infra') {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
