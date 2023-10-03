@@ -173,13 +173,13 @@ locals {
     // Could jsondecode the schema file and use the namespace
     fully_qualified_class_prefix = "com.github.zacharydhamilton.events"
 
-    animal_schema_files = fileset("../schemas/animals", "*.avsc")
+    animal_schema_files = fileset("../../schemas/animals", "*.avsc")
     animal_topic_names = [for s in local.animal_schema_files : lower(split(".", s)[0])]
 
-    pizza_schema_files = fileset("../schemas/pizza", "*.avsc")
+    pizza_schema_files = fileset("../../schemas/pizza", "*.avsc")
     pizza_topic_name = "pizza-ingredients"
 
-    vehicle_schema_files = fileset("../schemas/vehicles", "*.avsc")
+    vehicle_schema_files = fileset("../../schemas/vehicles", "*.avsc")
     vehicle_topic_name = "vehicles"
 }
 # TOPIC NAME STRATEGY
