@@ -29,4 +29,5 @@ output "app_manager_sr_key" {
 }
 output "app_manager_sr_secret" {
     value = confluent_api_key.app_manager_sr.secret
+    sensitive = true
 }
