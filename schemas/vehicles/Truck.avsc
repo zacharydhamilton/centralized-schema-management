@@ -2,7 +2,7 @@
     "type": "record",
     "name": "Truck",
     "namespace": "com.github.zacharydhamilton.events.vehicles",
-    "version": "1",
+    "version": "2",
     "fields": [
         {
             "name": "wheels",
@@ -28,6 +28,11 @@
             "name": "flatbed",
             "type": "boolean",
             "doc": "Whether or not this vehicle has a flatbed"
+        },
+        {
+            "name": "certified_pre_owned",
+            "type": "boolean",
+            "doc": "Is this vehicle certified pre-owned or not"
         }
     ]
 }

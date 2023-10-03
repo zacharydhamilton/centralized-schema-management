@@ -2,7 +2,7 @@
     "type": "record",
     "name": "Motorcycle",
     "namespace": "com.github.zacharydhamilton.events.vehicles",
-    "version": "1",
+    "version": "2",
     "fields": [
         {
             "name": "wheels",
@@ -18,6 +18,11 @@
             "name": "model",
             "type": "string",
             "doc": "The model of the vehicle"
+        },
+        {
+            "name": "certified_pre_owned",
+            "type": "boolean",
+            "doc": "Is this vehicle certified pre-owned or not"
         }
     ]
 }

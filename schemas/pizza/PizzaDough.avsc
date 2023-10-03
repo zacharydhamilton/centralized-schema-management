@@ -2,7 +2,7 @@
     "type": "record",
     "name": "PizzaDough",
     "namespace": "com.github.zacharydhamilton.events.pizza",
-    "version": "1",
+    "version": "2",
     "fields": [
         {
             "name": "pizza",
@@ -23,6 +23,11 @@
             "name": "size",
             "type": "string",
             "doc": "Diameter size in inches of the pizza dough"
+        },
+        {
+            "name": "gluten_free",
+            "type": "boolean",
+            "doc": "Whether or not this is gluten-free dough"
         }
     ]
 }

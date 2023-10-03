@@ -2,7 +2,7 @@
     "type": "record",
     "name": "PizzaTopping",
     "namespace": "com.github.zacharydhamilton.events.pizza",
-    "version": "1",
+    "version": "2",
     "fields": [
         {
             "name": "pizza",
@@ -28,6 +28,11 @@
             "name": "dsitribution",
             "type": "string",
             "doc": "How much of the pizza to cover with the pizza topping"
+        },
+        {
+            "name": "organic",
+            "type": "boolean",
+            "doc": "Is this topping organic or not"
         }
     ]
 }
