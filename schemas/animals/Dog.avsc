@@ -2,7 +2,7 @@
     "type": "record",
     "name": "Dog",
     "namespace": "com.github.zacharydhamilton.events.animals",
-    "version": "1",
+    "version": "3",
     "fields": [
         {
             "name": "species",
@@ -18,6 +18,16 @@
             "name": "name",
             "type": "string",
             "doc": "The name of the dog"
+        },
+        {
+            "name": "good_boy",
+            "type": "boolean", 
+            "doc": "If the dog is a good boy or not (only ever false if dog is a good girl)"
+        },
+        {
+            "name": "age",
+            "type": "int",
+            "doc": "The age of the dog"
         }
     ]
 }

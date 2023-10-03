@@ -2,7 +2,7 @@
     "type": "record",
     "name": "Cat",
     "namespace": "com.github.zacharydhamilton.events.animals",
-    "version": "1",
+    "version": "3",
     "fields": [
         {
             "name": "species",
@@ -18,6 +18,16 @@
             "name": "name",
             "type": "string",
             "doc": "The name of the cat"
+        },
+        {
+            "name": "pattern",
+            "type": "string",
+            "doc": "The pattern of the cats fur"
+        },
+        {
+            "name": "age",
+            "type": "int",
+            "doc": "The age of the cat"
         }
     ]
 }

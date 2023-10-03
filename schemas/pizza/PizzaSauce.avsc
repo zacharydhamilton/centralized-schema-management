@@ -2,7 +2,7 @@
     "type": "record",
     "name": "PizzaSauce",
     "namespace": "com.github.zacharydhamilton.events.pizza",
-    "version": "1",
+    "version": "3",
     "fields": [
         {
             "name": "pizza",
@@ -23,6 +23,16 @@
             "name": "amount",
             "type": "string",
             "doc": "Amount of the pizza sauce"
+        },
+        {
+            "name": "organic",
+            "type": "boolean",
+            "doc": "Is this sauce organic or not"
+        },
+        {
+            "name": "freshness",
+            "type": "int",
+            "doc": "How fresh the pizza is on a scale of 1-10"
         }
     ]
 }
