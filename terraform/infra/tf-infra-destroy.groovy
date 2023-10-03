@@ -6,6 +6,25 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                dir('terraform/infra') {
+                    sh 'terraform init'
+                }
+            }
+        }
+        stage('Terraform validate') {
+            steps {
+                dir('terraform/infra') {
+                    sh 'terraform validate'
+                }
+            }
+        }
         stage('Terraform destroy') {
             steps {
                 dir('terraform/infra') {
