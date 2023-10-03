@@ -12,7 +12,7 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh "terraform destroy -auto-approve -state=/var/outputs/tf-infra.tfstate"
+                        sh "terraform destroy -auto-approve -state=/var/outputs/tf-infra-main.tfstate"
                     }
                 }
             }
