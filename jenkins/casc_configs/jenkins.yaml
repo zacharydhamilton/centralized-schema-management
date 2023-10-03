@@ -9,6 +9,25 @@ jenkins:
   authorizationStrategy:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
+  views:
+  - all:
+      name: "all"
+  - list:
+      columns: ["status", "weather", "jobName", "lastSuccess", "lastFailure", "lastDuration", "buildButton"]
+      includeRegex: "tf-infra-.*"
+      name: "tf-infra-main"
+  - list:
+      columns: ["status", "weather", "jobName", "lastSuccess", "lastFailure", "lastDuration", "buildButton"]
+      includeRegex: "^.*main.*"
+      name: "release-main"
+  - list:
+      columns: ["status", "weather", "jobName", "lastSuccess", "lastFailure", "lastDuration", "buildButton"]
+      includeRegex: "^.*rel-1.0.0.*"
+      name: "release-1.0.0"
+  - list:
+      columns: ["status", "weather", "jobName", "lastSuccess", "lastFailure", "lastDuration", "buildButton"]
+      includeRegex: "^.*rel-2.0.0.*"
+      name: "release-2.0.0"
 
 credentials:
   system:

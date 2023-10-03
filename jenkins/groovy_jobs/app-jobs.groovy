@@ -1,4 +1,4 @@
-pipelineJob('app-branch-main') {
+pipelineJob('app-build-main') {
     definition {
         cpsScm {
             scm {
@@ -11,7 +11,7 @@ pipelineJob('app-branch-main') {
         }
     }
 }
-pipelineJob('app-branch-rel-1.0.0') {
+pipelineJob('app-build-rel-1.0.0') {
     definition {
         cpsScm {
             scm {
@@ -24,7 +24,7 @@ pipelineJob('app-branch-rel-1.0.0') {
         }
     }
 }
-pipelineJob('app-branch-rel-2.0.0') {
+pipelineJob('app-build-rel-2.0.0') {
     definition {
         cpsScm {
             scm {

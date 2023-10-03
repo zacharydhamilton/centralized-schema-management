@@ -35,7 +35,11 @@ pipeline {
                     withCredentials([
                         usernamePassword(credentialsId: 'confluent-cloud-creds', usernameVariable: 'CONFLUENT_CLOUD_API_KEY', passwordVariable: 'CONFLUENT_CLOUD_API_SECRET')
                     ]) {
-                        sh "terraform apply -auto-approve -state=/var/outputs/tf-schemas-${branchName}.tfstate"
+                        sh "terraform apply -auto-approve -state=/var/outputs/tf-schemas-${branchName}.tfstate \
+                        -var=\"env_id=$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw env_id)\" \
+                        -var=\"sr_cluster_id=$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw sr_cluster_id)\" \
+                        -var=\"app_manager_sr_key=$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw app_manager_sr_key)\" \
+                        -var=\"app_manager_sr_secret=$(terraform output -state=/var/outputs/tf-infra-main.tfstate -raw app_manager_sr_secret)\""
                     }
                 }
             }

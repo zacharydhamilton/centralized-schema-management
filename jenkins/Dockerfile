@@ -24,3 +24,4 @@ RUN jenkins-plugin-cli --plugins workflow-stm:0.1-beta-3
 RUN jenkins-plugin-cli --plugins workflow-support:865.v43e78cc44e0d
 RUN jenkins-plugin-cli --plugins git:5.2.0
 RUN jenkins-plugin-cli --plugins terraform:1.0.10
+# add the email extension that always fails
